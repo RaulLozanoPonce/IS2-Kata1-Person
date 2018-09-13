@@ -1,33 +1,33 @@
 package kata1;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.Duration;
+import java.time.LocalDate;
 
 public class Person {
     private final String name;
-    private final Calendar birthdate;
-    private final long MILLISECONDS_PER_YEAR = (long) (1000*60*60*24*365.25);
+    private final LocalDate birthdate;
+    private final long DAYS_PER_YEAR = (long) (365.25);
 
     public String getName() {
         return name;
     }
 
-    public Calendar getBirthdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
 
-    public Person(String name, Calendar birthdate) {
+    public Person(String name, LocalDate birthdate) {
         this.name = name;
         this.birthdate = birthdate;
     }
     
     public int getAge(){
-        Calendar today = GregorianCalendar.getInstance();
-        return (int) milliSecondsToYear(today.getTimeInMillis() -
-                birthdate.getTimeInMillis());
+        LocalDate today = LocalDate.now();
+        Duration daysBetween = Duration.between(birthdate.atStartOfDay(), LocalDate.now().atStartOfDay());
+        return (int) daysToYear(daysBetween.toDays());
     }
     
-    private long milliSecondsToYear(long millis){
-        return millis/MILLISECONDS_PER_YEAR;
+    private long daysToYear(long days){
+        return days/DAYS_PER_YEAR;
     }
 }
