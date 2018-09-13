@@ -1,29 +1,29 @@
 package kata1;
 
 import java.time.Duration;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Person {
     private final String name;
-    private final LocalDate birthdate;
+    private final LocalDateTime birthdate;
     private final long DAYS_PER_YEAR = (long) (365.25);
 
     public String getName() {
         return name;
     }
 
-    public LocalDate getBirthdate() {
+    public LocalDateTime getBirthdate() {
         return birthdate;
     }
 
-    public Person(String name, LocalDate birthdate) {
+    public Person(String name, LocalDateTime birthdate) {
         this.name = name;
         this.birthdate = birthdate;
     }
     
     public int getAge(){
-        LocalDate today = LocalDate.now();
-        Duration daysBetween = Duration.between(birthdate.atStartOfDay(), LocalDate.now().atStartOfDay());
+        LocalDateTime today = LocalDateTime.now();
+        Duration daysBetween = Duration.between(birthdate, LocalDateTime.now());
         return (int) daysToYear(daysBetween.toDays());
     }
     
